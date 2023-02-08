@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/02 16:57:29 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/08 17:59:47 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@
 # define PLAYER				'P'
 # define MAP_EXIT			'E'
 
+# define WALL_PATH "wall.xpm"
+# define FLOOR_PATH "black.xpm"
+# define COLLECTIBLE_PATH "food.xpm"
+# define PLAYER_PATH "pacman.xpm"
+# define MAP_EXIT_PATH "portal.xpm"
+# define WIN_PATH "win.xpm"
+
+# define KEY_W				13
+# define KEY_A				0
+# define KEY_S				1
+# define KEY_D				2
+
 typedef struct s_comp
 {
 	int	exit;
@@ -39,15 +51,24 @@ typedef struct s_image
 	int		y;
 }	t_image;
 
+typedef struct s_coords
+{
+	int		x;
+	int		y;
+}	t_coords;
+
 typedef struct s_game
 {
-	void	*mlx;
-	void	*win;
-	t_image	player;
-	t_image	wall;
-	t_image	floor;
-	t_image	collectible;
-	t_image	map_exit;
+	void		*mlx;
+	void		*win;
+	char		**map;
+	t_coords	player_pos;
+	t_image		player;
+	t_image		wall;
+	t_image		floor;
+	t_image		collectible;
+	t_image		map_exit;
+	t_image		win_screen;
 }	t_game;
 
 size_t	ft_strstr_len(char **str);
@@ -62,10 +83,11 @@ int		check_rectangular(char **map);
 int		check_walls(char **map);
 int		components_ifs(char c, t_comp *comps);
 t_comp	*check_components(char **map);
+void	count_components(char **map, t_comp *comps);
 int		compare_components(t_comp *comps1, t_comp *comps2);
 void	check_path(char **map, t_comp *comps, int x, int y);
-int		find_path(char **map, t_comp *comps);
-void	check_map(char	**map);
+int		find_path(t_game *game, t_comp *comps);
+void	check_map(t_game *game);
 
 int		create_trgb(int t, int r, int g, int b);
 int		get_t(int trgb);
@@ -73,6 +95,15 @@ int		get_r(int trgb);
 int		get_g(int trgb);
 int		get_b(int trgb);
 
-int		game_start(char	**map);
+void	game_init(t_game *game);
+int		game_start(t_game *game);
+int		init_images(t_game	*game);
+void	render_image(t_game *game, t_image sprite, int x, int y);
+void	render_map(t_game *game, char **map);
+
+int		key_hook(int keycode, t_game *game);
+void	update_player_pos(t_game *game);
+
+void	ft_error_msg(const char *msg, t_game *game);
 
 #endif

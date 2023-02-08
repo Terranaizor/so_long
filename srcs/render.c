@@ -6,27 +6,28 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:17:39 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/02 17:55:17 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/08 16:22:09 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-int	init_images(t_game	*game)
+void	render_image(t_game *game, t_image sprite, int x, int y)
 {
-	if (!game)
-		return (0);
-	game->wall.xpm_ptr = mlx_xpm_file_to_image(game->mlx, "wall.xpm", \
-	&game->wall.x, &game->wall.y);
-	game->player.xpm_ptr = mlx_xpm_file_to_image(game->mlx, "pacman.xpm", \
-	&game->player.x, &game->player.y);
-	game->floor.xpm_ptr = mlx_xpm_file_to_image(game->mlx, "black.xpm", \
-	&game->floor.x, &game->floor.y);
-	game->map_exit.xpm_ptr = mlx_xpm_file_to_image(game->mlx, "portal.xpm", \
-	&game->map_exit.x, &game->map_exit.y);
-	// game->collectible.xpm_ptr = mlx_xpm_file_to_image(game->mlx, "food.xpm", \
-	// &game->collectible.x, &game->collectible.y);
-	return (1);
+	mlx_put_image_to_window(game->mlx, game->win, sprite.xpm_ptr, \
+		sprite.x * x, sprite.y * y);
+}
+
+void	pick_image(char comp, t_game *game, int x, int y)
+{
+	if (comp == WALL)
+		render_image(game, game->wall, x, y);
+	else
+		render_image(game, game->floor, x, y);
+	if (comp == COLLECTIBLE)
+		render_image(game, game->collectible, x, y);
+	else if (comp == MAP_EXIT)
+		render_image(game, game->map_exit, x, y);
 }
 
 void	render_map(t_game *game, char **map)
@@ -40,41 +41,21 @@ void	render_map(t_game *game, char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == WALL)
-				mlx_put_image_to_window(game->mlx, game->win, game->wall.xpm_ptr, game->wall.x * j, game->wall.y * i);
-			// else if (map[i][j] == FLOOR)
-			// 	mlx_put_image_to_window(game->mlx, game->win, game->floor.xpm_ptr, game->floor.x * j, game->floor.y * i);
-			// else if (map[i][j] == COLLECTIBLE)
-			// {
-			// 	mlx_put_image_to_window(game->mlx, game->win, game->floor.xpm_ptr, game->floor.x * j, game->floor.y * i);
-			// 	mlx_put_image_to_window(game->mlx, game->win, game->collectible.xpm_ptr, game->collectible.x * j, game->collectible.y * i);
-			// }
-			else if (map[i][j] == PLAYER)
-			{
-				// mlx_put_image_to_window(game->mlx, game->win, game->floor.xpm_ptr, game->floor.x * j, game->floor.y * i);
-				mlx_put_image_to_window(game->mlx, game->win, game->player.xpm_ptr, game->player.x * j, game->player.y * i);
-			}
-			else if (map[i][j] == MAP_EXIT)
-			{
-				// mlx_put_image_to_window(game->mlx, game->win, game->floor.xpm_ptr, game->floor.x * j, game->floor.y * i);
-				mlx_put_image_to_window(game->mlx, game->win, game->map_exit.xpm_ptr, game->map_exit.x * j, game->map_exit.y * i);
-			}
+			pick_image(map[i][j], game, j, i);
 			j++;
 		}
 		i++;
 	}
+	render_image(game, game->player, game->player_pos.x, game->player_pos.y);
 }
 
-int	game_start(char	**map)
+int	game_start(t_game	*game)
 {
-	t_game	*game;
-	int		i;
-	int		j;
-
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, 1920, 1080, "Game");
 	init_images(game);
-	// render_map(game, map);
+	render_map(game, game->map);
+	mlx_key_hook(game->win, key_hook, game);
 	mlx_loop(game->mlx);
 	return (1);
 }
