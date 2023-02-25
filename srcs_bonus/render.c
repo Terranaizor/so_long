@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:17:39 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/25 16:23:39 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/25 17:27:56 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,23 @@ int	game_loop(t_game *game)
 
 	now = millitimestamp();
 	diff = now - game->time;
-	if (diff > 120 * 12)
+	if (diff > 120)
 	{
 		game->frame++;
 		game->time = now;
 		if (game->win_condition == 0)
 		{
-			// mlx_clear_window(game->mlx, game->win);
+			mlx_clear_window(game->mlx, game->win);
 			render_map(game, game->map);
 			if (game->frame == 12)
 			{
 				game->frame = 0;
-			}
 				move_enemies(game);
+			}
 			render_enemies(game);
 			render_player(game);
 			show_moves(game);
-			// mlx_do_sync(game->mlx);
+			mlx_do_sync(game->mlx);
 		}
 		else
 			game_win(game);
