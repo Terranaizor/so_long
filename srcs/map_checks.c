@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/08 17:33:47 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/15 17:13:40 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,11 @@ int	check_walls(char **map)
 
 t_comp	*check_components(char **map)
 {
-	int		i;
-	int		j;
 	t_comp	*comps;
 
 	if (!map || !map[0])
 		return (NULL);
-	comps = calloc(sizeof(t_comp), 1);
+	comps = ft_calloc(sizeof(t_comp), 1);
 	count_components(map, comps);
 	if (comps->exit != 1 || comps->player != 1 || comps->collect < 1)
 		throw_error(comps);
@@ -77,4 +75,5 @@ void	check_map(t_game *game)
 	if (!check_rectangular(game->map) || !check_walls(game->map) || \
 		!find_path(game, comps))
 		throw_error(comps);
+	free(comps);
 }

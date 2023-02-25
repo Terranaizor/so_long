@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:21:45 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/08 18:41:29 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/13 13:27:52 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	check_interaction(t_game *game)
 	if (game->map[y][x] == MAP_EXIT)
 	{
 		if (check_win(game))
-			render_image(game, game->win_screen, 0, 0);
+			game->win_condition = 1;
 	}
 }
 
@@ -63,7 +63,6 @@ int	move_player(int key, t_game *game)
 		game->player_pos.x = x;
 		game->player_pos.y = y;
 		check_interaction(game);
-		render_map(game, game->map);
 		return (1);
 	}
 	return (0);
@@ -72,6 +71,11 @@ int	move_player(int key, t_game *game)
 int	key_hook(int key, t_game *game)
 {
 	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D)
-		move_player(key, game);
+	{
+		if (move_player(key, game))
+			ft_printf("Number of movements: %d\n", ++game->movements);
+	}
+	else if (key == KEY_ESC)
+		close_game(game);
 	return (0);
 }

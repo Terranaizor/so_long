@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/08 17:59:47 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/25 16:47:19 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,18 @@
 # define PLAYER				'P'
 # define MAP_EXIT			'E'
 
-# define WALL_PATH "wall.xpm"
-# define FLOOR_PATH "black.xpm"
-# define COLLECTIBLE_PATH "food.xpm"
-# define PLAYER_PATH "pacman.xpm"
-# define MAP_EXIT_PATH "portal.xpm"
+# define WALL_PATH "sprites/wall.xpm"
+# define FLOOR_PATH "sprites/floor.xpm"
+# define COLLECTIBLE_PATH "sprites/gryvnya.xpm"
+# define PLAYER_PATH "sprites/devil_down.xpm"
+# define MAP_EXIT_PATH "sprites/exit_0.xpm"
 # define WIN_PATH "win.xpm"
 
 # define KEY_W				13
 # define KEY_A				0
 # define KEY_S				1
 # define KEY_D				2
+# define KEY_ESC			53
 
 typedef struct s_comp
 {
@@ -59,6 +60,8 @@ typedef struct s_coords
 
 typedef struct s_game
 {
+	int			win_condition;
+	int			movements;
 	void		*mlx;
 	void		*win;
 	char		**map;
@@ -70,6 +73,13 @@ typedef struct s_game
 	t_image		map_exit;
 	t_image		win_screen;
 }	t_game;
+
+typedef struct s_point
+{
+	int		x;
+	int		y;
+	int		dist;
+}	t_point;
 
 size_t	ft_strstr_len(char **str);
 void	init_comp(t_comp *comps);
@@ -102,8 +112,9 @@ void	render_image(t_game *game, t_image sprite, int x, int y);
 void	render_map(t_game *game, char **map);
 
 int		key_hook(int keycode, t_game *game);
-void	update_player_pos(t_game *game);
 
 void	ft_error_msg(const char *msg, t_game *game);
+int		close_game(t_game *game);
+void	game_win(t_game *game);
 
 #endif

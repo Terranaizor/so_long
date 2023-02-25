@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 12:06:08 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/08 18:13:52 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/13 13:07:53 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	free_game(t_game *game)
 		free(game->mlx);
 	if (game->win)
 		free(game->win);
+	if (game->map)
+		free(game->map);
 	if (game->wall.xpm_ptr)
 		free(game->wall.xpm_ptr);
 	if (game->player.xpm_ptr)
@@ -38,4 +40,12 @@ void	ft_error_msg(const char *msg, t_game *game)
 	free_game(game);
 	free(game);
 	exit (EXIT_FAILURE);
+}
+
+int	close_game(t_game *game)
+{
+	free_game(game);
+	free(game);
+	exit (0);
+	return (0);
 }
