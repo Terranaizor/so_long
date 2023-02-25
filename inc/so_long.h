@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/25 16:47:19 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/25 17:26:03 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # define COLLECTIBLE_PATH "sprites/gryvnya.xpm"
 # define PLAYER_PATH "sprites/devil_down.xpm"
 # define MAP_EXIT_PATH "sprites/exit_0.xpm"
-# define WIN_PATH "win.xpm"
 
 # define KEY_W				13
 # define KEY_A				0

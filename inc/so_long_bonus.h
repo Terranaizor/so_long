@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/24 16:49:08 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/25 17:26:00 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@
 # define MAP_EXIT_2_PATH "sprites/exit_2.xpm"
 # define MAP_EXIT_3_PATH "sprites/exit_3.xpm"
 # define MAP_EXIT_4_PATH "sprites/exit_4.xpm"
-# define WIN_PATH "win.xpm"
 # define SHADOW_PATH "sprites/shadow.xpm"
 # define ENEMY_PATH "ghost.xpm"
 
