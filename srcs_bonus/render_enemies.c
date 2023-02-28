@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 13:57:24 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/24 15:26:58 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/28 18:30:48 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,15 @@ void	render_enemies(t_game *game)
 	while (i < game->enemy_count)
 	{
 		moved = 0;
+		redraw_backgroung(game, &game->enemy_status[i]);
+		moved = check_move(&game->enemy_status[i].offset_x, \
+			&game->enemy_status[i].x);
+		if (!moved)
+			moved = check_move(&game->enemy_status[i].offset_y, \
+				&game->enemy_status[i].y);
+		if (moved)
+			if (check_player(game, game->enemy_status[i].x, game->enemy_status[i].y))
+				game_loose(game);
 		render_image(game, \
 		game->enemy[game->enemy_status[i].type] \
 		[check_direction(&(game->enemy_status[i]))] \
@@ -81,11 +90,6 @@ void	render_enemies(t_game *game)
 		calc_off(game->enemy_status[i].offset_x) * 15, \
 		game->enemy_status[i].y * 60 + \
 		calc_off(game->enemy_status[i].offset_y) * 15);
-		moved = check_move(&game->enemy_status[i].offset_x, \
-			&game->enemy_status[i].x);
-		if (!moved)
-			moved = check_move(&game->enemy_status[i].offset_y, \
-				&game->enemy_status[i].y);
 		i++;
 	}
 }

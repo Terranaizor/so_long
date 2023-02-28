@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:21:45 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/13 13:27:52 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/28 18:37:13 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	move_player(int key, t_game *game)
 
 	x = game->player_pos.x;
 	y = game->player_pos.y;
+	render_image(game, game->floor, x, y);
 	if (key == KEY_W)
 		y -= 1;
 	else if (key == KEY_S)

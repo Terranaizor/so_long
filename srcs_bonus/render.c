@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:17:39 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/25 17:27:56 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/28 19:39:03 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	render_image(t_game *game, t_image sprite, int x, int y)
 {
-	mlx_put_image_to_window(game->mlx, game->win, sprite.xpm_ptr, x, y + 50);
+	mlx_put_image_to_window(game->mlx, game->win, sprite.xpm_ptr, x, y);
 }
 
 void	pick_image(char comp, t_game *game, int x, int y)
@@ -26,7 +26,7 @@ void	pick_image(char comp, t_game *game, int x, int y)
 	if (comp == COLLECTIBLE)
 		render_image(game, game->collectible, x * 60, y * 60);
 	else if (comp == MAP_EXIT)
-		render_exit(game, x, y);
+		render_exit(game);
 }
 
 void	render_map(t_game *game, char **map)
@@ -54,21 +54,20 @@ int	game_loop(t_game *game)
 
 	now = millitimestamp();
 	diff = now - game->time;
-	if (diff > 120)
+	if (diff > 600)
 	{
 		game->frame++;
 		game->time = now;
 		if (game->win_condition == 0)
 		{
-			mlx_clear_window(game->mlx, game->win);
-			render_map(game, game->map);
 			if (game->frame == 12)
 			{
 				game->frame = 0;
 				move_enemies(game);
 			}
-			render_enemies(game);
+			render_exit(game);
 			render_player(game);
+			render_enemies(game);
 			show_moves(game);
 			mlx_do_sync(game->mlx);
 		}
@@ -86,6 +85,7 @@ int	game_start(t_game *game)
 	init_images(game);
 	init_enemies(game);
 	game_init(game);
+	render_map(game, game->map);
 	mlx_hook(game->win, 17, 1L << 0, close_game, game);
 	mlx_key_hook(game->win, key_hook, game);
 	mlx_loop_hook(game->mlx, game_loop, game);

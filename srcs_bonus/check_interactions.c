@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:44:29 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/24 16:13:31 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/28 18:03:42 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@ int	check_win(t_game *game)
 		return (1);
 	}
 	free(comps);
+	return (0);
+}
+
+int	check_player(t_game *game, int x, int y)
+{
+	if (x == game->player_status.x - \
+		game->player_status.offset_x / 4)
+	{
+		if (y == game->player_status.y - \
+			game->player_status.offset_y / 4)
+			return (1);
+	}
 	return (0);
 }
 

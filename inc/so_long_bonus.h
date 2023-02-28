@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/25 17:26:00 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/28 18:58:23 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@
 # define MAP_EXIT_3_PATH "sprites/exit_3.xpm"
 # define MAP_EXIT_4_PATH "sprites/exit_4.xpm"
 # define SHADOW_PATH "sprites/shadow.xpm"
-# define ENEMY_PATH "ghost.xpm"
 
 # define KEY_W				13
 # define KEY_A				0
@@ -168,6 +167,7 @@ int			calc_off(int offset);
 int			check_move(int *offset, int *coord);
 int			move_enemies(t_game *game);
 int			check_direction(t_being *being);
+void		redraw_backgroung(t_game *game, t_being *being);
 int			init_enemies(t_game *game);
 void		render_enemies(t_game *game);
 
@@ -176,11 +176,13 @@ int			game_start(t_game *game);
 void		check_interaction(t_game *game, t_being	being);
 int			check_win(t_game *game);
 int			check_enemies(t_game *game, int x, int y);
+int			check_player(t_game *game, int x, int y);
 
 int			init_images(t_game	*game);
+void		pick_image(char comp, t_game *game, int x, int y);
 void		render_image(t_game *game, t_image sprite, int x, int y);
 void		render_map(t_game *game, char **map);
-void		render_exit(t_game *game, int x, int y);
+void		render_exit(t_game *game);
 void		render_player(t_game *game);
 void		show_moves(t_game *game);
 long long	millitimestamp(void);

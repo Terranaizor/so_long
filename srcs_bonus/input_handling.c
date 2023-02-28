@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:21:45 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/24 16:30:22 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/28 19:09:13 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@ void	moves_ifs(int key, int *x, int *y, t_being *being)
 	if (key == KEY_W || key == 3)
 	{
 		*y -= 1;
-		being->offset_y = 4;
+		being->offset_y = 5;
 	}
 	else if (key == KEY_S)
 	{
 		*y += 1;
-		being->offset_y = -4;
+		being->offset_y = -5;
 	}
 	else if (key == KEY_A)
 	{
 		*x -= 1;
-		being->offset_x = 4;
+		being->offset_x = 5;
 	}
 	else if (key == KEY_D)
 	{
 		*x += 1;
-		being->offset_x = -4;
+		being->offset_x = -5;
 	}
 }
 
@@ -61,7 +61,7 @@ void	move_enemy_horizontal(t_game *game, t_being *enemy)
 			check_enemies(game, enemy->x + 1, enemy->y))
 			enemy->last_move = 0;
 		else
-			enemy->offset_x = -4;
+			enemy->offset_x = -5;
 	}
 	else if (enemy->last_move == 0)
 	{
@@ -69,7 +69,7 @@ void	move_enemy_horizontal(t_game *game, t_being *enemy)
 		check_enemies(game, enemy->x - 1, enemy->y))
 			enemy->last_move = 2;
 		else
-			enemy->offset_x = 4;
+			enemy->offset_x = 5;
 	}
 }
 
@@ -83,7 +83,7 @@ void	move_enemy_vertical(t_game *game, t_being *enemy)
 			check_enemies(game, enemy->x, enemy->y - 1))
 			enemy->last_move = 1;
 		else
-			enemy->offset_y = 4;
+			enemy->offset_y = 5;
 	}
 	else if (enemy->last_move == 1)
 	{
@@ -91,7 +91,7 @@ void	move_enemy_vertical(t_game *game, t_being *enemy)
 		check_enemies(game, enemy->x, enemy->y + 1))
 			enemy->last_move = 3;
 		else
-			enemy->offset_y = -4;
+			enemy->offset_y = -5;
 	}
 }
 

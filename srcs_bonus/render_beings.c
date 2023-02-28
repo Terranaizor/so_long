@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:09:55 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/22 19:21:41 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/28 19:19:49 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,30 @@ int	check_move(int *offset, int *coord)
 		}
 	}
 	return (0);
+}
+
+void	redraw_backgroung(t_game *game, t_being *being)
+{
+	int	dir;
+	int	x;
+	int	y;
+
+	if (!being->offset_x && !being->offset_y)
+		return ;
+	dir = check_direction(being);
+	x = being->x;
+	y = being->y;
+	pick_image(game->map[y][x], game, x, y);
+	if (dir == 0)
+		x--;
+	else if (dir == 0)
+		x--;
+	else if (dir == 1)
+		y++;
+	else if (dir == 2)
+		x++;
+	else if (dir == 3)
+		y--;
+	if (!check_enemies(game, x, y) && !check_player(game, x, y))
+		pick_image(game->map[y][x], game, x, y);
 }

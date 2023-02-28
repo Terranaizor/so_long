@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:17:39 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/25 16:44:40 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/28 18:36:23 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ int	game_loop(t_game *game)
 {
 	if (game->win_condition == 0)
 	{
-		mlx_clear_window(game->mlx, game->win);
-		render_map(game, game->map);
-		// sleep(1000);
+		render_image(game, game->player, \
+			game->player_pos.x, game->player_pos.y);
 	}
 	else
 	{
@@ -78,8 +77,8 @@ int	game_start(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, 1920, 1080, "Game");
-	// mlx_sync(3, game->win);
 	init_images(game);
+	render_map(game, game->map);
 	mlx_hook(game->win, 17, 1L << 0, close_game, game);
 	mlx_key_hook(game->win, key_hook, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
