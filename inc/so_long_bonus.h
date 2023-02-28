@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/28 18:58:23 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/28 20:04:25 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,9 +167,10 @@ int			calc_off(int offset);
 int			check_move(int *offset, int *coord);
 int			move_enemies(t_game *game);
 int			check_direction(t_being *being);
-void		redraw_backgroung(t_game *game, t_being *being);
+void		redraw_backgroung(t_game *game);
+void		redraw_being_backgroung(t_game *game, t_being *being);
 int			init_enemies(t_game *game);
-void		render_enemies(t_game *game);
+// void		render_enemies(t_game *game);
 
 void		game_init(t_game *game);
 int			game_start(t_game *game);
@@ -183,7 +184,8 @@ void		pick_image(char comp, t_game *game, int x, int y);
 void		render_image(t_game *game, t_image sprite, int x, int y);
 void		render_map(t_game *game, char **map);
 void		render_exit(t_game *game);
-void		render_player(t_game *game);
+// void		render_player(t_game *game);
+void		render_beings(t_game *game);
 void		show_moves(t_game *game);
 long long	millitimestamp(void);
 

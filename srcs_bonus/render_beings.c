@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:09:55 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/28 19:19:49 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/28 20:19:55 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ int	check_move(int *offset, int *coord)
 	return (0);
 }
 
-void	redraw_backgroung(t_game *game, t_being *being)
+void	redraw_being_backgroung(t_game *game, t_being *being)
 {
 	int	dir;
 	int	x;
 	int	y;
 
-	if (!being->offset_x && !being->offset_y)
-		return ;
+	// if (!being->offset_x && !being->offset_y)
+	// 	return ;
 	dir = check_direction(being);
 	x = being->x;
 	y = being->y;
@@ -90,6 +90,18 @@ void	redraw_backgroung(t_game *game, t_being *being)
 		x++;
 	else if (dir == 3)
 		y--;
-	if (!check_enemies(game, x, y) && !check_player(game, x, y))
-		pick_image(game->map[y][x], game, x, y);
+	pick_image(game->map[y][x], game, x, y);
+}
+
+void	redraw_backgroung(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	redraw_being_backgroung(game, &game->player_status);
+	while (i < game->enemy_count)
+	{
+		redraw_being_backgroung(game, &game->enemy_status[i]);
+		i++;
+	}
 }

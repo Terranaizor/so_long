@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 13:57:24 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/28 18:30:48 by nradin           ###   ########.fr       */
+/*   Updated: 2023/02/28 20:05:43 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,33 +63,55 @@ int	init_enemies(t_game *game)
 	return (1);
 }
 
-void	render_enemies(t_game *game)
+void	render_player(t_game *game, t_being *player)
 {
-	int	i;
 	int	moved;
 
+	moved = check_move(&player->offset_x, &player->x);
+	if (!moved)
+		moved = check_move(&player->offset_y, &player->y);
+	if (moved)
+		check_interaction(game, *player);
+	render_image(game, \
+		game->player[check_direction(player)] \
+		[ft_abs(calc_off(player->offset_x)) + \
+		ft_abs(calc_off(player->offset_y))], \
+		player->x * 60 + \
+		calc_off(player->offset_x) * 15, \
+		player->y * 60 + \
+		calc_off(player->offset_y) * 15);
+}
+
+void	render_enemy(t_game *game, t_being *enemy)
+{
+	int	moved;
+
+	moved = check_move(&enemy->offset_x, &enemy->x);
+	if (!moved)
+		moved = check_move(&enemy->offset_y, &enemy->y);
+	if (moved)
+		check_interaction(game, game->player_status);
+	render_image(game, \
+		game->enemy[enemy->type] \
+		[check_direction(enemy)] \
+		[ft_abs(calc_off(enemy->offset_x)) + \
+		ft_abs(calc_off(enemy->offset_y))], \
+		enemy->x * 60 + \
+		calc_off(enemy->offset_x) * 15, \
+		enemy->y * 60 + \
+		calc_off(enemy->offset_y) * 15);
+}
+
+void	render_beings(t_game *game)
+{
+	int	i;
+
+	redraw_backgroung(game);
+	render_player(game, &game->player_status);
 	i = 0;
 	while (i < game->enemy_count)
 	{
-		moved = 0;
-		redraw_backgroung(game, &game->enemy_status[i]);
-		moved = check_move(&game->enemy_status[i].offset_x, \
-			&game->enemy_status[i].x);
-		if (!moved)
-			moved = check_move(&game->enemy_status[i].offset_y, \
-				&game->enemy_status[i].y);
-		if (moved)
-			if (check_player(game, game->enemy_status[i].x, game->enemy_status[i].y))
-				game_loose(game);
-		render_image(game, \
-		game->enemy[game->enemy_status[i].type] \
-		[check_direction(&(game->enemy_status[i]))] \
-		[ft_abs(calc_off(game->enemy_status[i].offset_x)) + \
-		ft_abs(calc_off(game->enemy_status[i].offset_y))], \
-		game->enemy_status[i].x * 60 + \
-		calc_off(game->enemy_status[i].offset_x) * 15, \
-		game->enemy_status[i].y * 60 + \
-		calc_off(game->enemy_status[i].offset_y) * 15);
+		render_enemy(game, &game->enemy_status[i]);
 		i++;
 	}
 }
