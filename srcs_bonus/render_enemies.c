@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 13:57:24 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/28 20:05:43 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/01 16:35:28 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,13 @@ void	render_player(t_game *game, t_being *player)
 		moved = check_move(&player->offset_y, &player->y);
 	if (moved)
 		check_interaction(game, *player);
+	if (game->map[player->y][player->x] != MAP_EXIT)
+		render_image(game, \
+			game->shadow, \
+			player->x * 60 + \
+			calc_off(player->offset_x) * 15, \
+			player->y * 60 + \
+			calc_off(player->offset_y) * 15);
 	render_image(game, \
 		game->player[check_direction(player)] \
 		[ft_abs(calc_off(player->offset_x)) + \
@@ -80,6 +87,34 @@ void	render_player(t_game *game, t_being *player)
 		calc_off(player->offset_x) * 15, \
 		player->y * 60 + \
 		calc_off(player->offset_y) * 15);
+}
+
+void	render_player_loose(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game->map[i])
+	{
+		j = 0;
+		while (game->map[i][j] && game->map[i][j] != '\n')
+		{
+			if (game->map[i][j] == MAP_EXIT)
+			{
+				render_image(game, game->floor, j * 60, i * 60);
+				render_image(game, game->player_loose, j * 60, i * 60);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	render_player_win(t_game *game)
+{
+	render_image(game, game->player_win, \
+		game->player_status.x * 60, game->player_status.y * 60);
 }
 
 void	render_enemy(t_game *game, t_being *enemy)
@@ -91,6 +126,13 @@ void	render_enemy(t_game *game, t_being *enemy)
 		moved = check_move(&enemy->offset_y, &enemy->y);
 	if (moved)
 		check_interaction(game, game->player_status);
+	if (game->map[enemy->y][enemy->x] != MAP_EXIT)
+		render_image(game, \
+			game->shadow, \
+			enemy->x * 60 + \
+			calc_off(enemy->offset_x) * 15, \
+			enemy->y * 60 + \
+			calc_off(enemy->offset_y) * 15);
 	render_image(game, \
 		game->enemy[enemy->type] \
 		[check_direction(enemy)] \
@@ -102,16 +144,27 @@ void	render_enemy(t_game *game, t_being *enemy)
 		calc_off(enemy->offset_y) * 15);
 }
 
-void	render_beings(t_game *game)
+void	render_animations(t_game *game)
 {
 	int	i;
 
 	redraw_backgroung(game);
-	render_player(game, &game->player_status);
+	render_exit(game);
+	render_coins(game);
+	if (game->win_condition)
+	{
+		if (game->win_condition == -1)
+			render_player_loose(game);
+		else
+			render_player_win(game);
+	}
+	else
+		render_player(game, &game->player_status);
 	i = 0;
 	while (i < game->enemy_count)
 	{
-		render_enemy(game, &game->enemy_status[i]);
+		if (!(game->win_condition && game->map[game->enemy_status[i].y][game->enemy_status[i].x] == MAP_EXIT))
+			render_enemy(game, &game->enemy_status[i]);
 		i++;
 	}
 }

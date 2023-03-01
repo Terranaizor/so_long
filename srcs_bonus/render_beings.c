@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:09:55 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/28 20:19:55 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/01 12:57:55 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	redraw_being_backgroung(t_game *game, t_being *being)
 	int	x;
 	int	y;
 
-	// if (!being->offset_x && !being->offset_y)
-	// 	return ;
 	dir = check_direction(being);
 	x = being->x;
 	y = being->y;
@@ -93,12 +91,34 @@ void	redraw_being_backgroung(t_game *game, t_being *being)
 	pick_image(game->map[y][x], game, x, y);
 }
 
+void	redraw_coins_backgroung(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game->map[i])
+	{
+		j = 0;
+		while (game->map[i][j] && game->map[i][j] != '\n')
+		{
+			if (game->map[i][j] == COLLECTIBLE)
+			{
+				render_image(game, game->floor, j * 60, i * 60);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 void	redraw_backgroung(t_game *game)
 {
 	int	i;
 
 	i = 0;
 	redraw_being_backgroung(game, &game->player_status);
+	redraw_coins_backgroung(game);
 	while (i < game->enemy_count)
 	{
 		redraw_being_backgroung(game, &game->enemy_status[i]);

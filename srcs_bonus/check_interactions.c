@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:44:29 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/28 18:03:42 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/01 16:15:51 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ void	check_interaction(t_game *game, t_being	being)
 	if (game->map[y][x] == COLLECTIBLE)
 		game->map[y][x] = FLOOR;
 	if (check_enemies(game, x, y))
-		game_loose(game);
+	{
+		game->win_condition = -1;
+		return ;
+	}
 	if (game->map[y][x] == MAP_EXIT)
 	{
 		if (check_win(game))

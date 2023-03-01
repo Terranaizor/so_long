@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:02:57 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/25 17:26:38 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/01 14:55:22 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,9 @@ int	init_images(t_game	*game)
 	game->map_exit[4] = read_xmp_image(game->mlx, MAP_EXIT_4_PATH, game);
 	game->collectible = read_xmp_image(game->mlx, COLLECTIBLE_PATH, game);
 	game->shadow = read_xmp_image(game->mlx, SHADOW_PATH, game);
+	game->shadow_coin = read_xmp_image(game->mlx, SHADOW_COIN_PATH, game);
+	game->player_win = read_xmp_image(game->mlx, PLAYER_WIN_PATH, game);
+	game->player_loose = read_xmp_image(game->mlx, PLAYER_LOOSE_PATH, game);
 	init_enemy_1_images(game);
 	init_enemy_2_images(game);
 	init_player_images(game);

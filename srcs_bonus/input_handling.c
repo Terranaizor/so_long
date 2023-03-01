@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:21:45 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/28 19:09:13 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/01 13:59:14 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	key_hook(int key, t_game *game)
 {
 	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D)
 	{
-		if (game->player_status.offset_x == 0 && \
+		if (!game->win_condition && game->player_status.offset_x == 0 && \
 			game->player_status.offset_y == 0 && move_player(key, game))
 		{
 			ft_printf("Number of movements: %d\n", ++game->movements);

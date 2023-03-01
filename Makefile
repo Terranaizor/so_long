@@ -6,7 +6,7 @@
 #    By: nradin <nradin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 17:23:33 by nradin            #+#    #+#              #
-#    Updated: 2023/02/25 16:12:28 by nradin           ###   ########.fr        #
+#    Updated: 2023/03/01 12:41:54 by nradin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ SRCS_BONUS = main.c				\
 		game_exit.c				\
 		input_handling.c		\
 		render_utils.c			\
-		render_player.c			\
 		render_beings.c			\
 		render_enemies.c		\
 		render_exit.c			\

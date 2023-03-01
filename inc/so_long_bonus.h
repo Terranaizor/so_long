@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/28 20:04:25 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/01 14:20:19 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@
 # define PLAYER_RIGHT_0_PATH "sprites/devil_right.xpm"
 # define PLAYER_RIGHT_1_PATH "sprites/devil_right_1.xpm"
 # define PLAYER_RIGHT_2_PATH "sprites/devil_right_2.xpm"
+# define PLAYER_WIN_PATH "sprites/devil_win.xpm"
+# define PLAYER_LOOSE_PATH "sprites/devil_loose.xpm"
 # define ENEMY_1_UP_0_PATH "sprites/cossack_1_up.xpm"
 # define ENEMY_1_UP_1_PATH "sprites/cossack_1_up_1.xpm"
 # define ENEMY_1_UP_2_PATH "sprites/cossack_1_up_2.xpm"
@@ -75,6 +77,7 @@
 # define MAP_EXIT_3_PATH "sprites/exit_3.xpm"
 # define MAP_EXIT_4_PATH "sprites/exit_4.xpm"
 # define SHADOW_PATH "sprites/shadow.xpm"
+# define SHADOW_COIN_PATH "sprites/shadow_coin.xpm"
 
 # define KEY_W				13
 # define KEY_A				0
@@ -113,8 +116,8 @@ typedef struct s_game
 	int			movements;
 	int			enemy_count;
 	int			frame;
-	int			map_x_offset;
-	int			map_y_offset;
+	int			map_x;
+	int			map_y;
 	void		*mlx;
 	void		*win;
 	char		**map;
@@ -123,12 +126,15 @@ typedef struct s_game
 	t_being		*enemy_status;
 	t_image		enemy[2][4][5];
 	t_image		player[4][5];
+	t_image		player_win;
+	t_image		player_loose;
 	t_image		wall;
 	t_image		floor;
 	t_image		collectible;
 	t_image		map_exit[5];
 	t_image		win_screen;
 	t_image		shadow;
+	t_image		shadow_coin;
 }	t_game;
 
 typedef struct s_point
@@ -184,8 +190,9 @@ void		pick_image(char comp, t_game *game, int x, int y);
 void		render_image(t_game *game, t_image sprite, int x, int y);
 void		render_map(t_game *game, char **map);
 void		render_exit(t_game *game);
+void		render_coins(t_game *game);
 // void		render_player(t_game *game);
-void		render_beings(t_game *game);
+void		render_animations(t_game *game);
 void		show_moves(t_game *game);
 long long	millitimestamp(void);
 
@@ -196,5 +203,6 @@ void		ft_error_msg(const char *msg, t_game *game);
 int			close_game(t_game *game);
 void		game_win(t_game *game);
 void		game_loose(t_game *game);
+void		game_end(t_game *game);
 
 #endif
