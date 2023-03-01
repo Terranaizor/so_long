@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/25 17:26:03 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/01 17:03:43 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define FLOOR_PATH "sprites/floor.xpm"
 # define COLLECTIBLE_PATH "sprites/gryvnya.xpm"
 # define PLAYER_PATH "sprites/devil_down.xpm"
+# define PLAYER_WIN_PATH "sprites/devil_win.xpm"
 # define MAP_EXIT_PATH "sprites/exit_0.xpm"
 
 # define KEY_W				13
@@ -66,6 +67,7 @@ typedef struct s_game
 	char		**map;
 	t_coords	player_pos;
 	t_image		player;
+	t_image		player_win;
 	t_image		wall;
 	t_image		floor;
 	t_image		collectible;

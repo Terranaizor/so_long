@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:17:39 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/01 16:16:36 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/01 19:19:21 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	render_image(t_game *game, t_image sprite, int x, int y)
 {
+	if (x >= (game->map_x / 2 + 1) * 60)
+		x--;
+	if (y >= (game->map_y / 2 + 1) * 60)
+		y--;
 	mlx_put_image_to_window(game->mlx, game->win, sprite.xpm_ptr, x, y);
 }
 
@@ -65,7 +69,7 @@ int	game_loop(t_game *game)
 				move_enemies(game);
 			}
 			render_animations(game);
-			// show_moves(game);
+			show_moves(game);
 		}
 		else
 		{
@@ -81,7 +85,7 @@ int	game_start(t_game *game)
 	game->mlx = mlx_init();
 	game_init(game);
 	game->win = mlx_new_window(game->mlx, game->map_x * 60, \
-		game->map_y * 60, "Game");
+		game->map_y * 60 + 30, "Game");
 	init_images(game);
 	init_enemies(game);
 	render_map(game, game->map);

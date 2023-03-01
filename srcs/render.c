@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:17:39 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/01 16:42:28 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/01 17:03:59 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	game_loop(t_game *game)
 	}
 	else
 	{
-
+		render_image(game, game->player_win, \
+			game->player_pos.x, game->player_pos.y);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/01 14:20:19 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/01 18:19:41 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@
 # define MAP_EXIT_4_PATH "sprites/exit_4.xpm"
 # define SHADOW_PATH "sprites/shadow.xpm"
 # define SHADOW_COIN_PATH "sprites/shadow_coin.xpm"
+# define BLACK_PATH "sprites/black.xpm"
 
 # define KEY_W				13
 # define KEY_A				0
@@ -135,6 +136,7 @@ typedef struct s_game
 	t_image		win_screen;
 	t_image		shadow;
 	t_image		shadow_coin;
+	t_image		black;
 }	t_game;
 
 typedef struct s_point

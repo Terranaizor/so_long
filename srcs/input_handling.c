@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:21:45 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/28 18:37:13 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/01 17:06:00 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	key_hook(int key, t_game *game)
 {
 	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D)
 	{
-		if (move_player(key, game))
+		if (!game->win_condition && move_player(key, game))
 			ft_printf("Number of movements: %d\n", ++game->movements);
 	}
 	else if (key == KEY_ESC)

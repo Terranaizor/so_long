@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:09:49 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/15 18:40:52 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/01 18:32:55 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void	show_moves(t_game *game)
 
 	num = ft_itoa(game->movements);
 	moves = ft_strjoin("Number of movements:", num);
-	mlx_string_put(game->mlx, game->win, 0, 20, \
-		create_trgb(255, 255, 0, 0), moves);
+	render_image(game, game->black, (game->map_x - 4) / 2 * 60, game->map_y * 60);
+	mlx_string_put(game->mlx, game->win, (game->map_x - 4) / 2 * 60, game->map_y * 60 + 18, \
+		create_trgb(255, 0, 255, 0), moves);
 	free(moves);
 	free(num);
 }

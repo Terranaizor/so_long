@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:02:57 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/25 17:26:41 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/01 17:03:56 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	init_images(t_game	*game)
 		return (0);
 	game->wall = read_xmp_image(game->mlx, WALL_PATH, game);
 	game->player = read_xmp_image(game->mlx, PLAYER_PATH, game);
+	game->player_win = read_xmp_image(game->mlx, PLAYER_WIN_PATH, game);
 	game->floor = read_xmp_image(game->mlx, FLOOR_PATH, game);
 	game->map_exit = read_xmp_image(game->mlx, MAP_EXIT_PATH, game);
 	game->collectible = read_xmp_image(game->mlx, COLLECTIBLE_PATH, game);
