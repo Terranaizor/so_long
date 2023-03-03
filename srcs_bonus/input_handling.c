@@ -6,35 +6,11 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:21:45 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/01 13:59:14 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/03 22:42:13 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long_bonus.h"
-
-void	moves_ifs(int key, int *x, int *y, t_being *being)
-{
-	if (key == KEY_W || key == 3)
-	{
-		*y -= 1;
-		being->offset_y = 5;
-	}
-	else if (key == KEY_S)
-	{
-		*y += 1;
-		being->offset_y = -5;
-	}
-	else if (key == KEY_A)
-	{
-		*x -= 1;
-		being->offset_x = 5;
-	}
-	else if (key == KEY_D)
-	{
-		*x += 1;
-		being->offset_x = -5;
-	}
-}
 
 int	move_player(int key, t_game *game)
 {

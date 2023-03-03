@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/15 17:13:40 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/03 13:13:27 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,16 @@ int	check_walls(char **map)
 	return (1);
 }
 
-t_comp	*check_components(char **map)
+t_comp	*check_components(t_game *game, char **map)
 {
 	t_comp	*comps;
 
 	if (!map || !map[0])
 		return (NULL);
 	comps = ft_calloc(sizeof(t_comp), 1);
-	count_components(map, comps);
+	count_components(game, map, comps);
 	if (comps->exit != 1 || comps->player != 1 || comps->collect < 1)
-		throw_error(comps);
+		throw_error(game, comps, MAP_COMPONENTS_ERROR);
 	return (comps);
 }
 
@@ -71,9 +71,12 @@ void	check_map(t_game *game)
 {
 	t_comp	*comps;
 
-	comps = check_components(game->map);
-	if (!check_rectangular(game->map) || !check_walls(game->map) || \
-		!find_path(game, comps))
-		throw_error(comps);
+	comps = check_components(game, game->map);
+	if (!check_rectangular(game->map))
+		throw_error(game, comps, MAP_RECT_ERROR);
+	if (!check_walls(game->map))
+		throw_error(game, comps, MAP_WALL_ERROR);
+	if (!find_path(game, comps))
+		throw_error(game, comps, MAP_PATH_ERROR);
 	free(comps);
 }

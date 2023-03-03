@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:21:45 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/01 17:06:00 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/03 12:48:46 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_win(t_game *game)
 	t_comp	*comps;
 
 	comps = calloc(sizeof(t_comp), 1);
-	count_components(game->map, comps);
+	count_components(game, game->map, comps);
 	if (comps->collect == 0)
 	{
 		free(comps);

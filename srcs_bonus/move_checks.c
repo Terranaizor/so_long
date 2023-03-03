@@ -1,23 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_interactions.c                               :+:      :+:    :+:   */
+/*   move_checks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:44:29 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/01 17:08:20 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/03 22:42:17 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long_bonus.h"
+
+
+void	moves_ifs(int key, int *x, int *y, t_being *being)
+{
+	if (key == KEY_W || key == 3)
+	{
+		*y -= 1;
+		being->offset_y = 5;
+	}
+	else if (key == KEY_S)
+	{
+		*y += 1;
+		being->offset_y = -5;
+	}
+	else if (key == KEY_A)
+	{
+		*x -= 1;
+		being->offset_x = 5;
+	}
+	else if (key == KEY_D)
+	{
+		*x += 1;
+		being->offset_x = -5;
+	}
+}
 
 int	check_win(t_game *game)
 {
 	t_comp	*comps;
 
 	comps = calloc(sizeof(t_comp), 1);
-	count_components(game->map, comps);
+	count_components(game, game->map, comps);
 	if (comps->collect == 0)
 	{
 		free(comps);

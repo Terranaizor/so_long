@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 12:06:08 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/13 13:07:53 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/03 13:41:28 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,30 @@
 
 void	free_game(t_game *game)
 {
+	if (game->map)
+		ft_strstr_free(game->map);
+	if (game->wall.xpm_ptr)
+		mlx_destroy_image(game->mlx, game->wall.xpm_ptr);
+	if (game->player.xpm_ptr)
+		mlx_destroy_image(game->mlx, game->player.xpm_ptr);
+	if (game->floor.xpm_ptr)
+		mlx_destroy_image(game->mlx, game->floor.xpm_ptr);
+	if (game->map_exit.xpm_ptr)
+		mlx_destroy_image(game->mlx, game->map_exit.xpm_ptr);
+	if (game->collectible.xpm_ptr)
+		mlx_destroy_image(game->mlx, game->collectible.xpm_ptr);
+	if (game->player_win.xpm_ptr)
+		mlx_destroy_image(game->mlx, game->player_win.xpm_ptr);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)
 		free(game->mlx);
-	if (game->win)
-		free(game->win);
-	if (game->map)
-		free(game->map);
-	if (game->wall.xpm_ptr)
-		free(game->wall.xpm_ptr);
-	if (game->player.xpm_ptr)
-		free(game->player.xpm_ptr);
-	if (game->floor.xpm_ptr)
-		free(game->floor.xpm_ptr);
-	if (game->map_exit.xpm_ptr)
-		free(game->map_exit.xpm_ptr);
-	if (game->collectible.xpm_ptr)
-		free(game->collectible.xpm_ptr);
-	if (game->win_screen.xpm_ptr)
-		free(game->win_screen.xpm_ptr);
-}
-
-void	ft_error_msg(const char *msg, t_game *game)
-{
-	ft_putstr_fd((char *)msg, 2);
-	free_game(game);
 	free(game);
-	exit (EXIT_FAILURE);
 }
 
 int	close_game(t_game *game)
 {
 	free_game(game);
-	free(game);
 	exit (0);
 	return (0);
 }

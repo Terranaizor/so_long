@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:53:27 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/15 18:18:18 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/03 23:08:35 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@ void	init_comp(t_comp *comps)
 	comps->enemy = 0;
 }
 
-void	throw_error(t_comp *comps)
+void	throw_error(t_game *game, t_comp *comps, char *message)
 {
+	if (game)
+		free_game(game);
 	if (comps)
 		free(comps);
 	ft_putstr_fd("Error\n", 2);
-	exit(0);
+	ft_putstr_fd(message, 2);
+	exit(EXIT_FAILURE);
 }
 
 size_t	ft_strstr_len(char **str)

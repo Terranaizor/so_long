@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:01:59 by nradin            #+#    #+#             */
-/*   Updated: 2023/01/04 19:30:01 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/02 15:14:54 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	count_size(int n)
 	return (size);
 }
 
-char	*ft_itoa(int n)
+static char	*ft_itoa(int n)
 {
 	int		i;
 	long	n_long;

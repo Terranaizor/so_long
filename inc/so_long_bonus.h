@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/01 18:19:41 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/03 16:28:35 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,21 @@
 # define SHADOW_COIN_PATH "sprites/shadow_coin.xpm"
 # define BLACK_PATH "sprites/black.xpm"
 
-# define KEY_W				13
-# define KEY_A				0
-# define KEY_S				1
-# define KEY_D				2
-# define KEY_ESC			53
+# define ARGS_ERROR "Wrong amount of arguments!\n"
+# define FILE_ERROR "Given file path is invalid!\n"
+# define MAP_RECT_ERROR "Map is not rectangular!\n"
+# define MAP_WALL_ERROR "Map is not surrounded by walls!\n"
+# define MAP_PATH_ERROR "Map has no valid path!\n"
+# define MAP_COMPONENTS_ERROR "Map has has wrong amount of \
+components (exit/player/collectibles)!\n"
+# define MAP_INVALID_CHARACTERS_ERROR "Map has some invalid characters!\n"
+# define SPRITE_ERROR "Couldn't find a sprite. Does it exist?\n"
+
+# define KEY_W				119
+# define KEY_A				97
+# define KEY_S				115
+# define KEY_D				100
+# define KEY_ESC			65307
 
 typedef struct s_comp
 {
@@ -148,17 +158,17 @@ typedef struct s_point
 
 size_t		ft_strstr_len(char **str);
 void		init_comp(t_comp *comps);
-void		throw_error(t_comp *comps);
+void		throw_error(t_game *game, t_comp *comps, char *message);
 char		**ft_strstrdup(char **str, int size);
 void		ft_strstr_free(char **str);
 
 int			count_lines(int fd);
-char		**read_map(char	*map);
+char		**read_map(t_game *game, char	*map);
 int			check_rectangular(char **map);
 int			check_walls(char **map);
 int			components_ifs(char c, t_comp *comps);
-t_comp		*check_components(char **map);
-void		count_components(char **map, t_comp *comps);
+t_comp		*check_components(t_game *game, char **map);
+void		count_components(t_game *game, char **map, t_comp *comps);
 int			compare_components(t_comp *comps1, t_comp *comps2);
 void		check_path(char **map, t_comp *comps, int x, int y);
 int			find_path(t_game *game, t_comp *comps);
@@ -178,7 +188,6 @@ int			check_direction(t_being *being);
 void		redraw_backgroung(t_game *game);
 void		redraw_being_backgroung(t_game *game, t_being *being);
 int			init_enemies(t_game *game);
-// void		render_enemies(t_game *game);
 
 void		game_init(t_game *game);
 int			game_start(t_game *game);
@@ -193,7 +202,6 @@ void		render_image(t_game *game, t_image sprite, int x, int y);
 void		render_map(t_game *game, char **map);
 void		render_exit(t_game *game);
 void		render_coins(t_game *game);
-// void		render_player(t_game *game);
 void		render_animations(t_game *game);
 void		show_moves(t_game *game);
 long long	millitimestamp(void);
@@ -201,10 +209,11 @@ long long	millitimestamp(void);
 int			key_hook(int keycode, t_game *game);
 void		update_player_pos(t_game *game);
 
-void		ft_error_msg(const char *msg, t_game *game);
+void		free_game(t_game *game);
 int			close_game(t_game *game);
 void		game_win(t_game *game);
 void		game_loose(t_game *game);
 void		game_end(t_game *game);
+void		free_game(t_game *game);
 
 #endif

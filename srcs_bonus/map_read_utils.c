@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:54:16 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/15 18:18:25 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/03 14:31:56 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	count_lines(int fd)
 	return (i);
 }
 
-char	**read_map(char	*map)
+char	**read_map(t_game *game, char	*map)
 {
 	char	**res;
 	int		fd;
@@ -37,7 +37,7 @@ char	**read_map(char	*map)
 
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
-		exit(0);
+		throw_error(game, NULL, FILE_ERROR);
 	res = ft_calloc(sizeof(char *), count_lines(fd) + 1);
 	if (!res)
 		return (NULL);

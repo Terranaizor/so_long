@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*   map_parse_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:53:27 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/02 13:02:18 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/03 13:17:16 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ void	init_comp(t_comp *comps)
 	comps->collect = 0;
 }
 
-void	throw_error(t_comp *comps)
+void	throw_error(t_game *game, t_comp *comps, char *message)
 {
+	if (game)
+		free_game(game);
 	if (comps)
 		free(comps);
 	ft_putstr_fd("Error\n", 2);
-	exit(0);
+	ft_putstr_fd(message, 2);
+	exit(EXIT_FAILURE);
 }
 
 size_t	ft_strstr_len(char **str)

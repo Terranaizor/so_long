@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:17:39 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/01 19:19:21 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/03 23:08:45 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	render_map(t_game *game, char **map)
 		j = 0;
 		while (map[i][j] && map[i][j] != '\n')
 		{
-
 			pick_image(map[i][j], game, j, i);
 			j++;
 		}

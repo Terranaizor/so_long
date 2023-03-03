@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/01 17:03:43 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/03 13:43:43 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,21 @@
 # define PLAYER_WIN_PATH "sprites/devil_win.xpm"
 # define MAP_EXIT_PATH "sprites/exit_0.xpm"
 
-# define KEY_W				13
-# define KEY_A				0
-# define KEY_S				1
-# define KEY_D				2
-# define KEY_ESC			53
+# define ARGS_ERROR "Wrong amount of arguments!\n"
+# define FILE_ERROR "Given file path is invalid!\n"
+# define MAP_RECT_ERROR "Map is not rectangular!\n"
+# define MAP_WALL_ERROR "Map is not surrounded by walls!\n"
+# define MAP_PATH_ERROR "Map has no valid path!\n"
+# define MAP_COMPONENTS_ERROR "Map has has wrong amount of \
+components (exit/player/collectibles)!\n"
+# define MAP_INVALID_CHARACTERS_ERROR "Map has some invalid characters!\n"
+# define SPRITE_ERROR "Couldn't find a sprite. Does it exist?\n"
+
+# define KEY_W				119
+# define KEY_A				97
+# define KEY_S				115
+# define KEY_D				100
+# define KEY_ESC			65307
 
 typedef struct s_comp
 {
@@ -72,7 +82,6 @@ typedef struct s_game
 	t_image		floor;
 	t_image		collectible;
 	t_image		map_exit;
-	t_image		win_screen;
 }	t_game;
 
 typedef struct s_point
@@ -84,17 +93,18 @@ typedef struct s_point
 
 size_t	ft_strstr_len(char **str);
 void	init_comp(t_comp *comps);
-void	throw_error(t_comp *comps);
+void	throw_error(t_game *game, t_comp *comps, char *message);
 char	**ft_strstrdup(char **str, int size);
 void	ft_strstr_free(char **str);
+void	free_game(t_game *game);
 
 int		count_lines(int fd);
-char	**read_map(char	*map);
+char	**read_map(t_game *game, char *map);
 int		check_rectangular(char **map);
 int		check_walls(char **map);
 int		components_ifs(char c, t_comp *comps);
-t_comp	*check_components(char **map);
-void	count_components(char **map, t_comp *comps);
+t_comp	*check_components(t_game *game, char **map);
+void	count_components(t_game *game, char **map, t_comp *comps);
 int		compare_components(t_comp *comps1, t_comp *comps2);
 void	check_path(char **map, t_comp *comps, int x, int y);
 int		find_path(t_game *game, t_comp *comps);
@@ -114,7 +124,6 @@ void	render_map(t_game *game, char **map);
 
 int		key_hook(int keycode, t_game *game);
 
-void	ft_error_msg(const char *msg, t_game *game);
 int		close_game(t_game *game);
 void	game_win(t_game *game);
 

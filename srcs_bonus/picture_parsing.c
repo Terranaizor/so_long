@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:02:57 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/01 18:19:30 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/03 14:32:19 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_image	read_xmp_image(void *mlx, char *file, t_game *game)
 
 	sprite.xpm_ptr = mlx_xpm_file_to_image(mlx, file, &sprite.x, &sprite.y);
 	if (sprite.xpm_ptr == NULL)
-		ft_error_msg("Couldn't find a sprite. Does it exist?", game);
+		throw_error(game, NULL, SPRITE_ERROR);
 	return (sprite);
 }
 

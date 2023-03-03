@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 13:57:24 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/01 16:35:28 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/03 23:53:42 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	init_enemies(t_game *game)
 	t_comp	*comps;
 
 	comps = ft_calloc(sizeof(t_comp), 1);
-	count_components(game->map, comps);
+	count_components(game, game->map, comps);
 	game->enemy_count = comps->enemy;
 	game->enemy_status = ft_calloc(sizeof(t_being), comps->enemy);
 	add_enemies(game);
@@ -163,7 +163,8 @@ void	render_animations(t_game *game)
 	i = 0;
 	while (i < game->enemy_count)
 	{
-		if (!(game->win_condition && game->map[game->enemy_status[i].y][game->enemy_status[i].x] == MAP_EXIT))
+		if (!(game->win_condition && game->map[game->enemy_status[i].y] \
+				[game->enemy_status[i].x] == MAP_EXIT))
 			render_enemy(game, &game->enemy_status[i]);
 		i++;
 	}

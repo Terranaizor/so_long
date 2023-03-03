@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:55:12 by nradin            #+#    #+#             */
-/*   Updated: 2023/02/17 15:17:36 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/03 14:50:16 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int	compare_components(t_comp *comps1, t_comp *comps2)
 {
-	if (comps1->exit != comps2->exit)
+	if (comps1->exit != comps2->exit || \
+		comps1->collect != comps2->collect)
+	{
+		free(comps2);
 		return (0);
-	if (comps1->collect != comps2->collect)
-		return (0);
+	}
 	free(comps2);
 	return (1);
 }
@@ -52,6 +54,7 @@ int	find_path(t_game *game, t_comp *comps)
 	init_comp(reach);
 	mapcpy = ft_strstrdup(game->map, ft_strstr_len(game->map));
 	i = 0;
+	j = 0;
 	while (game->map[i])
 	{
 		j = 0;
