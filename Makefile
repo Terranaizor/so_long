@@ -6,12 +6,11 @@
 #    By: nradin <nradin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 17:23:33 by nradin            #+#    #+#              #
-#    Updated: 2023/03/03 22:52:02 by nradin           ###   ########.fr        #
+#    Updated: 2023/03/04 14:05:02 by nradin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = main.c					\
-		color_manipulations.c	\
 		map_checks.c			\
 		map_parse_utils.c		\
 		map_path.c				\
@@ -38,6 +37,8 @@ SRCS_BONUS = main.c				\
 		render_beings.c			\
 		render_enemies.c		\
 		render_exit.c			\
+		render_background.c		\
+		render_player.c			\
 		move_checks.c			\
 		free_memory.c			\
 
@@ -46,7 +47,7 @@ BONUS = bonus
 
 LIBFT = inc/libft/
 PRINTF = inc/printf/
-MLX = mlx2/
+MLX = mlx/
 
 SRCS_DIR = srcs/
 SRCS_BONUS_DIR = srcs_bonus/
@@ -78,15 +79,15 @@ $(NAME): $(OBJECTS_PREFIXED)
 	@make -C $(LIBFT)
 	@make -C $(PRINTF)
 	@make -C $(MLX)
-	# @gcc -o3 -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(OBJECTS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a $(MLX)/libmlx.a
-	@gcc -I/usr/include -O3 -I.. -g -o $(NAME) $(OBJECTS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a mlx_linux/libmlx.a -L.. -lmlx -L/usr/include/../lib -lXext -lX11 -lm -lbsd -lXrender
+	@gcc -o3 -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(OBJECTS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a $(MLX)/libmlx.dylib
+	# @gcc -I/usr/include -O3 -I.. -g -o $(NAME) $(OBJECTS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a mlx_linux/libmlx.a -L.. -lmlx -L/usr/include/../lib -lXext -lX11 -lm -lbsd -lXrender
 
 $(BONUS): $(OBJECTS_BONUS_PREFIXED)
 	@make -C $(LIBFT)
 	@make -C $(PRINTF)
 	@make -C $(MLX)
-	# @gcc -o3 -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(BONUS) $(OBJECTS_BONUS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a $(MLX)/libmlx.a
-	@gcc -I/usr/include -O3 -I.. -g -o $(BONUS) $(OBJECTS_BONUS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a mlx_linux/libmlx.a -L.. -lmlx -L/usr/include/../lib -lXext -lX11 -lm -lbsd -lXrender
+	@gcc -o3 -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(BONUS) $(OBJECTS_BONUS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a $(MLX)/libmlx.dylib
+	# @gcc -I/usr/include -O3 -I.. -g -o $(BONUS) $(OBJECTS_BONUS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a mlx_linux/libmlx.a -L.. -lmlx -L/usr/include/../lib -lXext -lX11 -lm -lbsd -lXrender
 clean:
 	@rm -rf $(OBJS_DIR)
 	@rm -rf $(OBJS_BONUS_DIR)

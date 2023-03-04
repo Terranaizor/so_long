@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:17:39 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/02 16:47:21 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/04 12:42:35 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,17 @@
 
 void	render_image(t_game *game, t_image sprite, int x, int y)
 {
+	int	off_x;
+	int	off_y;
+
+	off_x = 0;
+	off_y = 0;
+	if (x >= game->map_x / 2 + 1)
+		off_x = 1;
+	if (y >= game->map_y / 2 + 1)
+		off_y = 1;
 	mlx_put_image_to_window(game->mlx, game->win, sprite.xpm_ptr, \
-		sprite.x * x, sprite.y * y);
+		sprite.x * x - off_x, sprite.y * y - off_y);
 }
 
 void	pick_image(char comp, t_game *game, int x, int y)
@@ -60,18 +69,5 @@ int	game_loop(t_game *game)
 		render_image(game, game->player_win, \
 			game->player_pos.x, game->player_pos.y);
 	}
-	return (1);
-}
-
-int	game_start(t_game *game)
-{
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, 1920, 1080, "Game");
-	init_images(game);
-	render_map(game, game->map);
-	mlx_hook(game->win, 17, 1L << 0, close_game, game);
-	mlx_key_hook(game->win, key_hook, game);
-	mlx_loop_hook(game->mlx, game_loop, game);
-	mlx_loop(game->mlx);
 	return (1);
 }

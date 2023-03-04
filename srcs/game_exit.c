@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 12:06:08 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/03 13:41:28 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/04 14:01:52 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	free_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->player_win.xpm_ptr);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
-	if (game->mlx)
-		free(game->mlx);
 	free(game);
 }
 

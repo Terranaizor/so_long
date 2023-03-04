@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 16:23:20 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/03 18:00:04 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/04 14:01:57 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,5 @@ void	free_game(t_game *game)
 	free(game->enemy_status);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
-	if (game->mlx)
-		free(game->mlx);
 	free(game);
 }

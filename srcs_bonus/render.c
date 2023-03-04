@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:17:39 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/03 23:08:45 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/04 12:49:55 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,26 @@ void	render_map(t_game *game, char **map)
 	render_exit(game);
 }
 
+void	render_frame(t_game *game, int *game_ended)
+{
+	game->frame++;
+	if (game->win_condition == 0)
+	{
+		if (game->frame == 12)
+		{
+			game->frame = 0;
+			move_enemies(game);
+		}
+		render_animations(game);
+		show_moves(game);
+	}
+	else
+	{
+		*game_ended = 1;
+		game_end(game);
+	}
+}
+
 int	game_loop(t_game *game)
 {
 	long long	now;
@@ -58,39 +78,8 @@ int	game_loop(t_game *game)
 	diff = now - game->time;
 	if (diff > 120 && !game_ended)
 	{
-		game->frame++;
 		game->time = now;
-		if (game->win_condition == 0)
-		{
-			if (game->frame == 12)
-			{
-				game->frame = 0;
-				move_enemies(game);
-			}
-			render_animations(game);
-			show_moves(game);
-		}
-		else
-		{
-			game_ended = 1;
-			game_end(game);
-		}
+		render_frame(game, &game_ended);
 	}
-	return (1);
-}
-
-int	game_start(t_game *game)
-{
-	game->mlx = mlx_init();
-	game_init(game);
-	game->win = mlx_new_window(game->mlx, game->map_x * 60, \
-		game->map_y * 60 + 30, "Game");
-	init_images(game);
-	init_enemies(game);
-	render_map(game, game->map);
-	mlx_hook(game->win, 17, 1L << 0, close_game, game);
-	mlx_key_hook(game->win, key_hook, game);
-	mlx_loop_hook(game->mlx, game_loop, game);
-	mlx_loop(game->mlx);
 	return (1);
 }

@@ -6,12 +6,11 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:44:29 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/03 22:42:17 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/04 12:02:30 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long_bonus.h"
-
 
 void	moves_ifs(int key, int *x, int *y, t_being *being)
 {

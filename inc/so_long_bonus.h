@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/03 16:28:35 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/04 12:52:43 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ components (exit/player/collectibles)!\n"
 # define MAP_INVALID_CHARACTERS_ERROR "Map has some invalid characters!\n"
 # define SPRITE_ERROR "Couldn't find a sprite. Does it exist?\n"
 
-# define KEY_W				119
-# define KEY_A				97
-# define KEY_S				115
-# define KEY_D				100
-# define KEY_ESC			65307
+# define KEY_W				13
+# define KEY_A				0
+# define KEY_S				1
+# define KEY_D				2
+# define KEY_ESC			53
 
 typedef struct s_comp
 {
@@ -190,11 +190,12 @@ void		redraw_being_backgroung(t_game *game, t_being *being);
 int			init_enemies(t_game *game);
 
 void		game_init(t_game *game);
-int			game_start(t_game *game);
+int			game_loop(t_game *game);
 void		check_interaction(t_game *game, t_being	being);
 int			check_win(t_game *game);
 int			check_enemies(t_game *game, int x, int y);
 int			check_player(t_game *game, int x, int y);
+void		moves_ifs(int key, int *x, int *y, t_being *being);
 
 int			init_images(t_game	*game);
 void		pick_image(char comp, t_game *game, int x, int y);
@@ -203,6 +204,10 @@ void		render_map(t_game *game, char **map);
 void		render_exit(t_game *game);
 void		render_coins(t_game *game);
 void		render_animations(t_game *game);
+void		render_player(t_game *game, t_being *player);
+void		render_player_loose(t_game *game);
+void		render_player_win(t_game *game);
+void		render_enemy(t_game *game, t_being *enemy);
 void		show_moves(t_game *game);
 long long	millitimestamp(void);
 

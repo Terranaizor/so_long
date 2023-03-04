@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:09:55 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/01 12:57:55 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/04 12:50:31 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,60 +68,28 @@ int	check_move(int *offset, int *coord)
 	return (0);
 }
 
-void	redraw_being_backgroung(t_game *game, t_being *being)
-{
-	int	dir;
-	int	x;
-	int	y;
-
-	dir = check_direction(being);
-	x = being->x;
-	y = being->y;
-	pick_image(game->map[y][x], game, x, y);
-	if (dir == 0)
-		x--;
-	else if (dir == 0)
-		x--;
-	else if (dir == 1)
-		y++;
-	else if (dir == 2)
-		x++;
-	else if (dir == 3)
-		y--;
-	pick_image(game->map[y][x], game, x, y);
-}
-
-void	redraw_coins_backgroung(t_game *game)
+void	render_animations(t_game *game)
 {
 	int	i;
-	int	j;
 
-	i = 0;
-	while (game->map[i])
+	redraw_backgroung(game);
+	render_exit(game);
+	render_coins(game);
+	if (game->win_condition)
 	{
-		j = 0;
-		while (game->map[i][j] && game->map[i][j] != '\n')
-		{
-			if (game->map[i][j] == COLLECTIBLE)
-			{
-				render_image(game, game->floor, j * 60, i * 60);
-			}
-			j++;
-		}
-		i++;
+		if (game->win_condition == -1)
+			render_player_loose(game);
+		else
+			render_player_win(game);
 	}
-}
-
-void	redraw_backgroung(t_game *game)
-{
-	int	i;
-
+	else
+		render_player(game, &game->player_status);
 	i = 0;
-	redraw_being_backgroung(game, &game->player_status);
-	redraw_coins_backgroung(game);
 	while (i < game->enemy_count)
 	{
-		redraw_being_backgroung(game, &game->enemy_status[i]);
+		if (!(game->win_condition && game->map[game->enemy_status[i].y] \
+				[game->enemy_status[i].x] == MAP_EXIT))
+			render_enemy(game, &game->enemy_status[i]);
 		i++;
 	}
 }

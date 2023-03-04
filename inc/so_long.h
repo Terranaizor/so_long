@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/03 13:43:43 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/04 12:43:03 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ components (exit/player/collectibles)!\n"
 # define MAP_INVALID_CHARACTERS_ERROR "Map has some invalid characters!\n"
 # define SPRITE_ERROR "Couldn't find a sprite. Does it exist?\n"
 
-# define KEY_W				119
-# define KEY_A				97
-# define KEY_S				115
-# define KEY_D				100
-# define KEY_ESC			65307
+# define KEY_W				13
+# define KEY_A				0
+# define KEY_S				1
+# define KEY_D				2
+# define KEY_ESC			53
 
 typedef struct s_comp
 {
@@ -72,6 +72,8 @@ typedef struct s_game
 {
 	int			win_condition;
 	int			movements;
+	int			map_x;
+	int			map_y;
 	void		*mlx;
 	void		*win;
 	char		**map;
@@ -116,10 +118,11 @@ int		get_r(int trgb);
 int		get_g(int trgb);
 int		get_b(int trgb);
 
+int		game_loop(t_game *game);
 void	game_init(t_game *game);
-int		game_start(t_game *game);
 int		init_images(t_game	*game);
 void	render_image(t_game *game, t_image sprite, int x, int y);
+void	pick_image(char comp, t_game *game, int x, int y);
 void	render_map(t_game *game, char **map);
 
 int		key_hook(int keycode, t_game *game);

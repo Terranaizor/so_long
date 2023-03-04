@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:59:03 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/03 14:33:26 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/04 14:06:33 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_comp	*check_components(t_game *game, char **map)
 	comps = ft_calloc(sizeof(t_comp), 1);
 	count_components(game, map, comps);
 	if (comps->exit != 1 || comps->player != 1 \
-		|| comps->collect < 1 || comps->enemy < 1)
+		|| comps->collect < 1)
 		throw_error(game, comps, MAP_COMPONENTS_ERROR);
 	return (comps);
 }
