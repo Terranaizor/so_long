@@ -6,7 +6,7 @@
 /*   By: nradin <nradin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:17:39 by nradin            #+#    #+#             */
-/*   Updated: 2023/03/04 12:42:35 by nradin           ###   ########.fr       */
+/*   Updated: 2023/03/04 15:12:42 by nradin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,8 @@
 
 void	render_image(t_game *game, t_image sprite, int x, int y)
 {
-	int	off_x;
-	int	off_y;
-
-	off_x = 0;
-	off_y = 0;
-	if (x >= game->map_x / 2 + 1)
-		off_x = 1;
-	if (y >= game->map_y / 2 + 1)
-		off_y = 1;
 	mlx_put_image_to_window(game->mlx, game->win, sprite.xpm_ptr, \
-		sprite.x * x - off_x, sprite.y * y - off_y);
+		sprite.x * x, sprite.y * y);
 }
 
 void	pick_image(char comp, t_game *game, int x, int y)
