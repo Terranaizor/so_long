@@ -17,7 +17,8 @@
 # include "printf/ft_printf.h"
 # include <limits.h>
 # include <fcntl.h>
-# include "../mlx/mlx.h"
+# include "../MLX42/include/MLX42/MLX42.h"
+// # include "../minilibx-linux/mlx_png.h"
 
 # define WALL				'1'
 # define FLOOR				'0'

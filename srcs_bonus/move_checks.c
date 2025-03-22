@@ -12,28 +12,20 @@
 
 #include "../inc/so_long_bonus.h"
 
-void	moves_ifs(int key, int *x, int *y, t_being *being)
-{
-	if (key == KEY_W || key == 3)
-	{
-		*y -= 1;
-		being->offset_y = 5;
-	}
-	else if (key == KEY_S)
-	{
-		*y += 1;
-		being->offset_y = -5;
-	}
-	else if (key == KEY_A)
-	{
-		*x -= 1;
-		being->offset_x = 5;
-	}
-	else if (key == KEY_D)
-	{
-		*x += 1;
-		being->offset_x = -5;
-	}
+void moves_ifs(int key, int *x, int *y, t_being *being) {
+    if (key == MLX_KEY_W || key == 3) {
+        *y -= 1;
+        being->offset_y = 5;
+    } else if (key == MLX_KEY_S) {
+        *y += 1;
+        being->offset_y = -5;
+    } else if (key == MLX_KEY_A) {
+        *x -= 1;
+        being->offset_x = 5;
+    } else if (key == MLX_KEY_D) {
+        *x += 1;
+        being->offset_x = -5;
+    }
 }
 
 int	check_win(t_game *game)

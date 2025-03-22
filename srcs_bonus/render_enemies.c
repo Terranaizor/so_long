@@ -63,29 +63,28 @@ int	init_enemies(t_game *game)
 	return (1);
 }
 
-void	render_enemy(t_game *game, t_being *enemy)
-{
-	int	moved;
+void render_enemy(t_game *game, t_being *enemy) {
+    int moved;
 
-	moved = check_move(&enemy->offset_x, &enemy->x);
-	if (!moved)
-		moved = check_move(&enemy->offset_y, &enemy->y);
-	if (moved)
-		check_interaction(game, game->player_status);
-	if (game->map[enemy->y][enemy->x] != MAP_EXIT)
-		render_image(game, \
-			game->shadow, \
-			enemy->x * 60 + \
-			calc_off(enemy->offset_x) * 15, \
-			enemy->y * 60 + \
-			calc_off(enemy->offset_y) * 15);
-	render_image(game, \
-		game->enemy[enemy->type] \
-		[check_direction(enemy)] \
-		[ft_abs(calc_off(enemy->offset_x)) + \
-		ft_abs(calc_off(enemy->offset_y))], \
-		enemy->x * 60 + \
-		calc_off(enemy->offset_x) * 15, \
-		enemy->y * 60 + \
-		calc_off(enemy->offset_y) * 15);
+    moved = check_move(&enemy->offset_x, &enemy->x);
+    if (!moved)
+        moved = check_move(&enemy->offset_y, &enemy->y);
+    if (moved)
+        check_interaction(game, game->player_status);
+    if (game->map[enemy->y][enemy->x] != MAP_EXIT)
+        render_image(game,
+                     game->shadow,
+                     enemy->x * 60 +
+                     calc_off(enemy->offset_x) * 15,
+                     enemy->y * 60 +
+                     calc_off(enemy->offset_y) * 15);
+    render_image(game,
+                 game->enemy[enemy->type]
+                 [check_direction(enemy)]
+                 [ft_abs(calc_off(enemy->offset_x)) +
+                  ft_abs(calc_off(enemy->offset_y))],
+                 enemy->x * 60 +
+                 calc_off(enemy->offset_x) * 15,
+                 enemy->y * 60 +
+                 calc_off(enemy->offset_y) * 15);
 }

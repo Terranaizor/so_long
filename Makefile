@@ -37,7 +37,7 @@ SRCS_BONUS = main.c				\
 		render_beings.c			\
 		render_enemies.c		\
 		render_exit.c			\
-		render_background.c		\
+		render_background.c	\
 		render_player.c			\
 		move_checks.c			\
 		free_memory.c			\
@@ -47,7 +47,7 @@ BONUS = bonus
 
 LIBFT = inc/libft/
 PRINTF = inc/printf/
-MLX = mlx/
+MLX = MLX42/build/
 
 SRCS_DIR = srcs/
 SRCS_BONUS_DIR = srcs_bonus/
@@ -79,13 +79,14 @@ $(NAME): $(OBJECTS_PREFIXED)
 	@make -C $(LIBFT)
 	@make -C $(PRINTF)
 	@make -C $(MLX)
-	@gcc -o3 -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(OBJECTS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a $(MLX)libmlx.a
+	@gcc -O3 -o $(NAME) $(OBJECTS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a $(MLX)libmlx42.a -I/usr/include -Imlx -Lmlx_Linux -lmlx_Linux -L ./minilibx-linux -Imlx_Linux -L -lft -lXext -lX11 -lm -lz -lglfw -ldl -lm -lX11 -lXrandr -lXi -lXxf86vm -lXcursor -lGL
 
 $(BONUS): $(OBJECTS_BONUS_PREFIXED)
 	@make -C $(LIBFT)
 	@make -C $(PRINTF)
 	@make -C $(MLX)
-	@gcc -o3 -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(BONUS) $(OBJECTS_BONUS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a $(MLX)libmlx.a
+	@gcc -O3 -o $(BONUS) $(OBJECTS_BONUS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a $(MLX)libmlx42.a -I/usr/include -Imlx -Lmlx_Linux -lmlx_Linux -L ./minilibx-linux -Imlx_Linux -L -lft -lXext -lX11 -lm -lz -lglfw -ldl -lm -lX11 -lXrandr -lXi -lXxf86vm -lXcursor -lGL
+
 clean:
 	@rm -rf $(OBJS_DIR)
 	@rm -rf $(OBJS_BONUS_DIR)

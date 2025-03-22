@@ -71,6 +71,7 @@ int	move_player(int key, t_game *game)
 
 int	key_hook(int key, t_game *game)
 {
+	ft_printf("%d\n", key);
 	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D)
 	{
 		if (!game->win_condition && move_player(key, game))

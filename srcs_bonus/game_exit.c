@@ -12,28 +12,26 @@
 
 #include "../inc/so_long_bonus.h"
 
-int	close_game(t_game *game)
-{
-	free_game(game);
-	exit (EXIT_FAILURE);
-	return (0);
+void close_game(void *param) {
+	
+    t_game *game = (t_game *)param;
+    free_game(game);
+    exit(EXIT_FAILURE);
 }
 
-void	game_end(t_game *game)
-{
-	int	i;
+void game_end(t_game *game) {
+    int i;
 
-	i = 0;
-	game->player_status.last_move = 1;
-	game->player_status.offset_x = 0;
-	game->player_status.offset_y = 0;
-	while (i < game->enemy_count)
-	{
-		game->enemy_status[i].last_move = 1;
-		game->enemy_status[i].offset_x = 0;
-		game->enemy_status[i].offset_y = 0;
-		i++;
-	}
-	render_map(game, game->map);
-	render_animations(game);
+    i = 0;
+    game->player_status.last_move = 1;
+    game->player_status.offset_x = 0;
+    game->player_status.offset_y = 0;
+    while (i < game->enemy_count) {
+        game->enemy_status[i].last_move = 1;
+        game->enemy_status[i].offset_x = 0;
+        game->enemy_status[i].offset_y = 0;
+        i++;
+    }
+    render_map(game, game->map);
+    render_animations(game);
 }

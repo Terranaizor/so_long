@@ -22,18 +22,17 @@ long long	millitimestamp(void)
 	return (microtime);
 }
 
-void	show_moves(t_game *game)
-{
-	char	*moves;
-	char	*num;
+mlx_image_t *show_moves(t_game *game) {
+    mlx_image_t *text_img;
+    char *moves;
 
-	num = ft_itoa(game->movements);
-	moves = ft_strjoin("Number of movements:", num);
-	render_image(game, game->black, (game->map_x - 4) \
-		/ 2 * 60 + 40, game->map_y * 60);
-	mlx_string_put(game->mlx, game->win, (game->map_x - 4) \
-		/ 2 * 60 + 40, game->map_y * 60 + 18, \
-		create_trgb(255, 0, 255, 0), moves);
-	free(moves);
-	free(num);
+    moves = ft_itoa(game->movements);
+    if (!moves)
+        return (NULL);
+    text_img = mlx_put_string(game->mlx, moves, (game->map_x - 4) / 2 * 60 + 40, game->map_y * 60 + 18);
+    free(moves);
+    if (text_img) {
+        mlx_set_instance_depth(text_img->instances, 100);
+    }
+    return (text_img);
 }
