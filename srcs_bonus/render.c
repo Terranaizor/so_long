@@ -14,7 +14,8 @@
 
 void render_image(t_game *game, t_image sprite, int x, int y) {
     if (sprite.img) {
-        mlx_image_to_window(game->mlx, sprite.img, x, y);
+        // mlx_image_to_window(game->mlx, sprite.img, x, y);
+        copy_image_to_buffer(game->draw_buffer.img, sprite.img, x, y);
     }
 }
 void pick_image(char comp, t_game *game, int x, int y) {
@@ -47,8 +48,13 @@ void render_frame(t_game *game, int *game_ended) {
             game->frame = 0;
             move_enemies(game);
         }
+        clear_buffer(game->draw_buffer.img, 0xFF000000);
         render_animations(game);
-        show_moves(game);
+        mlx_image_to_window(game->mlx, game->draw_buffer.img, 0, 0);
+        mlx_image_t *temp = game->draw_buffer.img;
+        game->draw_buffer.img = game->display_buffer.img;
+        game->display_buffer.img = temp;
+        // show_moves(game);
     } else {
         *game_ended = 1;
         game_end(game);

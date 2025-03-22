@@ -79,13 +79,13 @@ $(NAME): $(OBJECTS_PREFIXED)
 	@make -C $(LIBFT)
 	@make -C $(PRINTF)
 	@make -C $(MLX)
-	@gcc -O3 -o $(NAME) $(OBJECTS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a $(MLX)libmlx42.a -I/usr/include -Imlx -Lmlx_Linux -lmlx_Linux -L ./minilibx-linux -Imlx_Linux -L -lft -lXext -lX11 -lm -lz -lglfw -ldl -lm -lX11 -lXrandr -lXi -lXxf86vm -lXcursor -lGL
+	@gcc -O3 -o $(NAME) $(OBJECTS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a $(MLX)libmlx42.a -I/usr/include -Imlx  -L ./minilibx-linux  -L -lft -lXext -lX11 -lm -lz -lglfw -ldl -lm -lX11 -lXrandr -lXi -lXxf86vm -lXcursor -lGL
 
 $(BONUS): $(OBJECTS_BONUS_PREFIXED)
 	@make -C $(LIBFT)
 	@make -C $(PRINTF)
 	@make -C $(MLX)
-	@gcc -O3 -o $(BONUS) $(OBJECTS_BONUS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a $(MLX)libmlx42.a -I/usr/include -Imlx -Lmlx_Linux -lmlx_Linux -L ./minilibx-linux -Imlx_Linux -L -lft -lXext -lX11 -lm -lz -lglfw -ldl -lm -lX11 -lXrandr -lXi -lXxf86vm -lXcursor -lGL
+	@gcc -O3 -o $(BONUS) $(OBJECTS_BONUS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a $(MLX)libmlx42.a -I/usr/include -Imlx -L ./minilibx-linux  -L -lft -lXext -lX11 -lm -lz -lglfw -ldl -lm -lX11 -lXrandr -lXi -lXxf86vm -lXcursor -lGL
 
 clean:
 	@rm -rf $(OBJS_DIR)

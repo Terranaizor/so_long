@@ -105,13 +105,6 @@ typedef struct s_comp
     int enemy;
 }   t_comp;
 
-typedef struct s_image
-{
-    mlx_image_t *img;
-    int         x;
-    int         y;
-}   t_image;
-
 typedef struct s_being
 {
     int         x;
@@ -121,6 +114,13 @@ typedef struct s_being
     int         last_move;
     int         type;
 }   t_being;
+
+typedef struct s_image
+{
+    mlx_image_t *img;
+    int         x;
+    int         y;
+}   t_image;
 
 typedef struct s_game
 {
@@ -147,6 +147,8 @@ typedef struct s_game
     t_image         shadow;
     t_image         shadow_coin;
     t_image         black;
+    t_image         display_buffer;
+    t_image         draw_buffer;
 }   t_game;
 
 typedef struct s_point
@@ -210,6 +212,8 @@ void        render_player_win(t_game *game);
 void        render_enemy(t_game *game, t_being *enemy);
 mlx_image_t *show_moves(t_game *game);
 long long   millitimestamp(void);
+void        copy_image_to_buffer(mlx_image_t *dest, mlx_image_t *src, int dest_x, int dest_y);
+void        clear_buffer(mlx_image_t *buffer, uint32_t color);
 
 void		key_hook(mlx_key_data_t keydata, void *param);
 void        update_player_pos(t_game *game);

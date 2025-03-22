@@ -121,6 +121,11 @@ int init_images(t_game *game) {
     game->player_win = read_xmp_image(PLAYER_WIN_PATH, game);
     game->player_loose = read_xmp_image(PLAYER_LOOSE_PATH, game);
     game->black = read_xmp_image(BLACK_PATH, game);
+
+    game->display_buffer.img = mlx_new_image(game->mlx, game->map_x * 60, game->map_y * 60 + 30);
+    game->draw_buffer.img = mlx_new_image(game->mlx, game->map_x * 60, game->map_y * 60 + 30);
+    clear_buffer(game->draw_buffer.img, 0xFF000000);
+    clear_buffer(game->display_buffer.img, 0xFF000000);
     init_enemy_1_images(game);
     init_enemy_2_images(game);
     init_player_images(game);

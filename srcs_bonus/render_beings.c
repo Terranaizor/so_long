@@ -71,16 +71,11 @@ int	check_move(int *offset, int *coord)
 void render_animations(t_game *game) {
     int i;
 
-    redraw_backgroung(game);
-    render_exit(game);
-    render_coins(game);
-    if (game->win_condition) {
-        if (game->win_condition == -1)
-            render_player_loose(game);
-        else
-            render_player_win(game);
-    } else
-        render_player(game, &game->player_status);
+    // redraw_backgroung(game);
+	// render_map(game, game->map);
+    // render_exit(game);
+    // render_coins(game);
+    
     i = 0;
     while (i < game->enemy_count) {
         if (!(game->win_condition && game->map[game->enemy_status[i].y]
@@ -88,4 +83,11 @@ void render_animations(t_game *game) {
             render_enemy(game, &game->enemy_status[i]);
         i++;
     }
+	if (game->win_condition) {
+        if (game->win_condition == -1)
+            render_player_loose(game);
+        else
+            render_player_win(game);
+    } else
+        render_player(game, &game->player_status);
 }

@@ -36,3 +36,31 @@ mlx_image_t *show_moves(t_game *game) {
     }
     return (text_img);
 }
+
+void clear_buffer(mlx_image_t *buffer, uint32_t color) {
+    if (!buffer)
+        return;
+    uint32_t *pixels = (uint32_t *)buffer->pixels;
+    int size = buffer->width * buffer->height;
+    for (int i = 0; i < size; i++) {
+        pixels[i] = color;
+    }
+}
+
+void copy_image_to_buffer(mlx_image_t *dest, mlx_image_t *src, int dest_x, int dest_y) {
+    uint32_t *dest_pixels = (uint32_t *)dest->pixels;
+    uint32_t *src_pixels = (uint32_t *)src->pixels;
+    int src_width = src->width;
+    int src_height = src->height;
+    int dest_width = dest->width;
+
+    for (int y = 0; y < src_height; y++) {
+        for (int x = 0; x < src_width; x++) {
+            int src_index = y * src_width + x;
+            int dest_index = (y + dest_y) * dest_width + (x + dest_x);
+            if (x + dest_x >= 0 && x + dest_x < dest_width && y + dest_y >= 0 && y + dest_y < (int)dest->height) {
+                dest_pixels[dest_index] = src_pixels[src_index];
+            }
+        }
+    }
+}
