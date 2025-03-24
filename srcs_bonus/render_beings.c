@@ -72,9 +72,9 @@ void render_animations(t_game *game) {
     int i;
 
     // redraw_backgroung(game);
-	// render_map(game, game->map);
-    // render_exit(game);
-    // render_coins(game);
+	render_map(game, game->map);
+    render_exit(game);
+    render_coins(game);
     
     i = 0;
     while (i < game->enemy_count) {

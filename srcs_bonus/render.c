@@ -39,6 +39,7 @@ void render_map(t_game *game, char **map) {
     }
     render_coins(game);
     render_exit(game);
+    mlx_image_to_window(game->mlx, game->draw_buffer.img, 0, 0);
 }
 
 void render_frame(t_game *game, int *game_ended) {

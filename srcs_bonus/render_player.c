@@ -97,30 +97,6 @@ void render_player(t_game *game, t_being *player) {
     // Малювання гравця
     render_image(game, game->player[check_direction(player)][ft_abs(calc_off(player->offset_x)) + ft_abs(calc_off(player->offset_y))], player_x, player_y);
 }
-void render_player(t_game *game, t_being *player) {
-    int moved;
-    int shadow_x;
-    int shadow_y;
-    int player_x;
-    int player_y;
-
-    moved = check_move(&player->offset_x, &player->x);
-    if (!moved)
-        moved = check_move(&player->offset_y, &player->y);
-    if (moved)
-        check_interaction(game, *player);
-
-    shadow_x = player->x * 60 + calc_off(player->offset_x) * 15;
-    shadow_y = player->y * 60 + calc_off(player->offset_y) * 15;
-    player_x = player->x * 60 + calc_off(player->offset_x) * 15;
-    player_y = player->y * 60 + calc_off(player->offset_y) * 15;
-
-    // Малювання тіні
-    render_image(game, game->shadow, shadow_x, shadow_y);
-
-    // Малювання гравця
-    render_image(game, game->player[check_direction(player)][ft_abs(calc_off(player->offset_x)) + ft_abs(calc_off(player->offset_y))], player_x, player_y);
-}
 
 void render_player_loose(t_game *game) {
     int i;

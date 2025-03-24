@@ -16,6 +16,9 @@ int move_player(keys_t key, t_game *game) {
     int x;
     int y;
 
+    if (game->player_status.offset_x != 0 ||
+        game->player_status.offset_y != 0)
+        return (0);
     x = game->player_status.x;
     y = game->player_status.y;
     moves_ifs(key, &x, &y, &game->player_status);

@@ -53,13 +53,36 @@ void copy_image_to_buffer(mlx_image_t *dest, mlx_image_t *src, int dest_x, int d
     int src_width = src->width;
     int src_height = src->height;
     int dest_width = dest->width;
+    int dest_height = dest->height;
 
     for (int y = 0; y < src_height; y++) {
         for (int x = 0; x < src_width; x++) {
             int src_index = y * src_width + x;
             int dest_index = (y + dest_y) * dest_width + (x + dest_x);
-            if (x + dest_x >= 0 && x + dest_x < dest_width && y + dest_y >= 0 && y + dest_y < (int)dest->height) {
-                dest_pixels[dest_index] = src_pixels[src_index];
+
+            if (x + dest_x >= 0 && x + dest_x < dest_width && y + dest_y >= 0 && y + dest_y < dest_height) {
+                uint32_t src_pixel = src_pixels[src_index];
+                uint32_t dest_pixel = dest_pixels[dest_index];
+
+                // Розпаковуємо кольори та альфа-канал
+                uint8_t src_a = (src_pixel >> 24) & 0xFF;
+                uint8_t src_r = (src_pixel >> 16) & 0xFF;
+                uint8_t src_g = (src_pixel >> 8) & 0xFF;
+                uint8_t src_b = src_pixel & 0xFF;
+
+                uint8_t dest_a = (dest_pixel >> 24) & 0xFF;
+                uint8_t dest_r = (dest_pixel >> 16) & 0xFF;
+                uint8_t dest_g = (dest_pixel >> 8) & 0xFF;
+                uint8_t dest_b = dest_pixel & 0xFF;
+
+                // Виконуємо альфа-змішування
+                uint8_t out_a = src_a + dest_a * (255 - src_a) / 255;
+                uint8_t out_r = (src_r * src_a + dest_r * dest_a * (255 - src_a) / 255) / out_a;
+                uint8_t out_g = (src_g * src_a + dest_g * dest_a * (255 - src_a) / 255) / out_a;
+                uint8_t out_b = (src_b * src_a + dest_b * dest_a * (255 - src_a) / 255) / out_a;
+
+                // Збираємо назад піксель
+                dest_pixels[dest_index] = (out_a << 24) | (out_r << 16) | (out_g << 8) | out_b;
             }
         }
     }

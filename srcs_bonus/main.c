@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
     game->map = read_map(game, argv[1]);
     check_map(game);
     game_init(game);
-    game->mlx = mlx_init(game->map_x * 60, game->map_y * 60 + 30, "Game", NULL);
+    game->mlx = mlx_init(game->map_x * 60, game->map_y * 60, "Game", NULL);
     if (!game->mlx)
         throw_error(game, NULL, MLX_INIT_ERROR);
     init_images(game);
