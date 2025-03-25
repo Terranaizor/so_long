@@ -26,8 +26,9 @@ int main(int argc, char *argv[]) {
         throw_error(game, NULL, MLX_INIT_ERROR);
     init_images(game);
     init_enemies(game);
-    render_map(game, game->map);
     mlx_close_hook(game->mlx, close_game, game);
+    render_map(game, game->map);
+    mlx_image_to_window(game->mlx, game->draw_buffer.img, 0, 0);
     mlx_key_hook(game->mlx, key_hook, game);
     mlx_loop_hook(game->mlx, game_loop, game);
     mlx_loop(game->mlx);

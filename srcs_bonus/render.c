@@ -37,9 +37,7 @@ void render_map(t_game *game, char **map) {
         }
         i++;
     }
-    render_coins(game);
-    render_exit(game);
-    mlx_image_to_window(game->mlx, game->draw_buffer.img, 0, 0);
+    // mlx_image_to_window(game->mlx, game->draw_buffer.img, 0, 0);
 }
 
 void render_frame(t_game *game, int *game_ended) {
@@ -59,6 +57,7 @@ void render_frame(t_game *game, int *game_ended) {
     } else {
         *game_ended = 1;
         game_end(game);
+        mlx_image_to_window(game->mlx, game->draw_buffer.img, 0, 0);
     }
 }
 
