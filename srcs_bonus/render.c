@@ -69,7 +69,7 @@ void game_loop(void *param) {
 
     now = millitimestamp();
     diff = now - game->time;
-    if (diff > 120 && !game_ended) {
+    if (diff > 100 && !game_ended) {
         game->time = now;
         render_frame(game, &game_ended);
     }

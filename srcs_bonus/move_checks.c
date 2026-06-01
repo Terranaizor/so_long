@@ -32,7 +32,7 @@ int	check_win(t_game *game)
 {
 	t_comp	*comps;
 
-	comps = calloc(sizeof(t_comp), 1);
+	comps = calloc(1, sizeof(t_comp));
 	count_components(game, game->map, comps);
 	if (comps->collect == 0)
 	{

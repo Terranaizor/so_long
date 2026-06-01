@@ -63,7 +63,7 @@ CC = gcc
 
 CC_FLAGS = -Wall -Wextra -Werror
 
-all: $(NAME) $(BONUS)
+all: $(BONUS)
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c inc/so_long.h
 	@mkdir -p $(OBJS_DIR)
@@ -84,6 +84,7 @@ $(NAME): $(OBJECTS_PREFIXED)
 $(BONUS): $(OBJECTS_BONUS_PREFIXED)
 	@make -C $(LIBFT)
 	@make -C $(PRINTF)
+	@cmake -S MLX42 -B MLX42/build
 	@make -C $(MLX)
 	@gcc -O3 -o $(BONUS) $(OBJECTS_BONUS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a $(MLX)libmlx42.a -I/usr/include -Imlx -L ./minilibx-linux  -L -lft -lXext -lX11 -lm -lz -lglfw -ldl -lm -lX11 -lXrandr -lXi -lXxf86vm -lXcursor -lGL
 
