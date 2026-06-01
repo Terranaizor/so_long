@@ -50,7 +50,7 @@ int	find_path(t_game *game, t_comp *comps)
 	t_comp	*reach;
 	char	**mapcpy;
 
-	reach = calloc(sizeof(t_comp), 1);
+	reach = calloc(1, sizeof(t_comp));
 	init_comp(reach);
 	mapcpy = ft_strstrdup(game->map, ft_strstr_len(game->map));
 	i = 0;

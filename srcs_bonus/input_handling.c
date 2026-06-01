@@ -12,41 +12,39 @@
 
 #include "../inc/so_long_bonus.h"
 
-int	move_player(int key, t_game *game)
-{
-	int	x;
-	int	y;
+int move_player(keys_t key, t_game *game) {
+    int x;
+    int y;
 
-	x = game->player_status.x;
-	y = game->player_status.y;
-	moves_ifs(key, &x, &y, &game->player_status);
-	if (game->map[y][x] != WALL)
-		return (1);
-	game->player_status.offset_x = 0;
-	game->player_status.offset_y = 0;
-	return (0);
+    if (game->player_status.offset_x != 0 ||
+        game->player_status.offset_y != 0)
+        return (0);
+    x = game->player_status.x;
+    y = game->player_status.y;
+    moves_ifs(key, &x, &y, &game->player_status);
+    if (game->map[y][x] != WALL) // Замініть WALL на вашу константу
+        return (1);
+    game->player_status.offset_x = 0;
+    game->player_status.offset_y = 0;
+    return (0);
 }
 
-void	move_enemy_horizontal(t_game *game, t_being *enemy)
-{
-	if (!(enemy->offset_x == 0 && enemy->offset_y == 0))
-		return ;
-	if (enemy->last_move == 2)
-	{
-		if (game->map[enemy->y][enemy->x + 1] == WALL || \
-			check_enemies(game, enemy->x + 1, enemy->y))
-			enemy->last_move = 0;
-		else
-			enemy->offset_x = -5;
-	}
-	else if (enemy->last_move == 0)
-	{
-		if (game->map[enemy->y][enemy->x - 1] == WALL || \
-		check_enemies(game, enemy->x - 1, enemy->y))
-			enemy->last_move = 2;
-		else
-			enemy->offset_x = 5;
-	}
+void move_enemy_horizontal(t_game *game, t_being *enemy) {
+    if (!(enemy->offset_x == 0 && enemy->offset_y == 0))
+        return;
+    if (enemy->last_move == 2) {
+        if (game->map[enemy->y][enemy->x + 1] == WALL ||
+            check_enemies(game, enemy->x + 1, enemy->y))
+            enemy->last_move = 0;
+        else
+            enemy->offset_x = -5;
+    } else if (enemy->last_move == 0) {
+        if (game->map[enemy->y][enemy->x - 1] == WALL ||
+            check_enemies(game, enemy->x - 1, enemy->y))
+            enemy->last_move = 2;
+        else
+            enemy->offset_x = 5;
+    }
 }
 
 void	move_enemy_vertical(t_game *game, t_being *enemy)
@@ -87,17 +85,15 @@ int	move_enemies(t_game *game)
 	return (0);
 }
 
-int	key_hook(int key, t_game *game)
-{
-	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D)
-	{
-		if (!game->win_condition && game->player_status.offset_x == 0 && \
-			game->player_status.offset_y == 0 && move_player(key, game))
-		{
-			game->movements += 1;
-		}
-	}
-	else if (key == KEY_ESC)
-		close_game(game);
-	return (0);
+void key_hook(mlx_key_data_t keydata, void *param) {
+    t_game *game = (t_game *)param;
+
+    if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_D) {
+        if (keydata.action == MLX_PRESS) {
+            move_player(keydata.key, game); // Correct order
+        }
+    }
+    if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS) {
+        close_game(game);
+    }
 }
