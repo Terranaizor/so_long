@@ -47,7 +47,7 @@ BONUS = bonus
 
 LIBFT = inc/libft/
 PRINTF = inc/printf/
-MLX = MLX42/build/
+MLX = mlx/build/
 
 SRCS_DIR = srcs/
 SRCS_BONUS_DIR = srcs_bonus/
@@ -84,7 +84,7 @@ $(NAME): $(OBJECTS_PREFIXED)
 $(BONUS): $(OBJECTS_BONUS_PREFIXED)
 	@make -C $(LIBFT)
 	@make -C $(PRINTF)
-	@cmake -S MLX42 -B MLX42/build
+	@cmake -S mlx -B mlx/build
 	@make -C $(MLX)
 	@gcc -O3 -o $(BONUS) $(OBJECTS_BONUS_PREFIXED) inc/libft/libft.a inc/printf/libftprintf.a $(MLX)libmlx42.a -I/usr/include -Imlx -L ./minilibx-linux  -L -lft -lXext -lX11 -lm -lz -lglfw -ldl -lm -lX11 -lXrandr -lXi -lXxf86vm -lXcursor -lGL
 
