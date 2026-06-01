@@ -20,7 +20,7 @@
 # include <sys/time.h>
 # include <time.h>
 # include <stdlib.h>
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "../mlx/include/MLX42/MLX42.h"
 
 # define WALL           '1'
 # define FLOOR          '0'
